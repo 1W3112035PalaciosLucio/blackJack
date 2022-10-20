@@ -29,7 +29,7 @@ namespace ApiBlackJack
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddDbContext<BaseBlackJackContext>(x => x.UseMySQL("Server=localhost; Database=BlackJack; Port=3306;User Id=root; Password=45262;"));
+            services.AddDbContext<BaseBlackJackContext>(x => x.UseMySQL("Server=localhost; Database=BlackJack; Port=3306;User Id=root; Password=42260431;"));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BlackJack_Api", Version = "v1" });
