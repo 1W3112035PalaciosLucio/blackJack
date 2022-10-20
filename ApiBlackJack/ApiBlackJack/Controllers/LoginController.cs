@@ -13,9 +13,11 @@ using System.Security.Claims;
 using System.Text;
 using System;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiBlackJack.Controllers
 {
+ 
     [ApiController]
     [Route("[controller]")]
     public class LoginController : Controller
@@ -29,7 +31,8 @@ namespace ApiBlackJack.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(LoginComando comando)
+        [Route("Login")]
+        public async Task<ActionResult> LoginPost(LoginComando comando)
         {
             if(!ModelState.IsValid)
             {
@@ -68,6 +71,14 @@ namespace ApiBlackJack.Controllers
                 return Forbid();
             }
         }
+
+        //[HttpGet]
+        //[Route("getA")]
+        //public IActionResult GetA()
+        //{
+        //    var r = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.NameIdentifier);
+        //    return Ok(r == null ? "" : r.Value);
+        //}
 
     }
 }

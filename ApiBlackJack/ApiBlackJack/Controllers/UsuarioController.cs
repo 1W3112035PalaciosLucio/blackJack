@@ -10,6 +10,9 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using ApiBlackJack.Helper;
+using ApiBlackJack.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiBlackJack.Controllers
 {
@@ -31,49 +34,59 @@ namespace ApiBlackJack.Controllers
         }
 
         [HttpGet]
-        [Route("getUsuarios")]
-        public async Task<ActionResult> getUsuarios()
+        [Route("getUser")]
+        public async Task<IActionResult> GetUser()
         {
-            var lista = await context.Usuarios.ToListAsync();
-
-            return Ok(lista);
-        }
-
-        [HttpPost]
-        [Route("loginUsuario")]
-        public async Task<ActionResult<ResultadoBase>> postLogin([FromBody] LoginComando comando)
-        {
-            ResultadoBase resultado = new ResultadoBase();
-            byte[] ePass = GetHash(comando.Clave);
-            var usuario = await context.Usuarios.Where(c => c.Email.Equals(comando.Email) && c.ClaveHash.Equals(ePass)).FirstOrDefaultAsync();
-            if (usuario != null)
+            List<UsuarioComando> Usuarios = await context.Usuarios.Select(x => new UsuarioComando()
             {
-                resultado.setOk();
-                return Ok(resultado);
-            }
-            else
-            {
-                resultado.setError("Usuario no encontrado");
-                return BadRequest(resultado);
-            }
+                IdUsuario = x.Id,
+                Usuario = x.Email,
+            }).ToListAsync();
+            return Ok(Usuarios);
         }
 
         [HttpGet]
-        [Route("getUsuarios/{id}")]
-        public async Task<ActionResult<ResultadoBase>> getUsuarioById(int id)
+        [Route("getUserId/{id}")]
+        public async Task<IActionResult> Get(int id)
         {
-            var usuario = await context.Usuarios.Where(c => c.Id.Equals(id)).FirstOrDefaultAsync();
-            ResultadoBase resultado = new ResultadoBase();
-            if(usuario == null)
+            UsuarioComando Usuarios = await context.Usuarios.Where(x => x.Id == id).Select(x => new UsuarioComando()
             {
-                resultado.setError("Usuario no encontrado");
-                return BadRequest(resultado);
-            }
-            else
+                IdUsuario = x.Id,
+                Usuario = x.Email
+            }).SingleOrDefaultAsync();
+            return Ok(Usuarios);
+        }
+
+        [HttpPost]
+        [Route("CrearUsuario")]
+
+        public async Task<IActionResult> Post(UserComando Usuario)
+        {
+            Usuarios u = new Usuarios();
+
+            if (!ModelState.IsValid)
             {
-                return Ok(usuario);
+                return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
             }
 
+            if (await context.Usuarios.Where(x => x.Email == Usuario.Email).AnyAsync())
+            {
+                return BadRequest(ErrorHelper.Response(400, $"El usuario {Usuario.Email} ya existe."));
+            }
+
+            HashedPassword Password = HashHelper.Hash(Usuario.ClaveHash);
+            u.Nombre = Usuario.Nombre;
+            u.Apellido = Usuario.Apellido;
+            u.Email = Usuario.Email;
+            u.ClaveHash = Password.Password;
+            u.ClaveSalt = Password.Salt;
+            context.Usuarios.Add(u);
+            await context.SaveChangesAsync();
+            return CreatedAtAction(nameof(Get), new { id = Usuario.Id }, new UsuarioComando()
+            {
+                IdUsuario = Usuario.Id,
+                Usuario = Usuario.Email
+            });
         }
 
     }
