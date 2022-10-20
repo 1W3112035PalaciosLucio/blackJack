@@ -15,8 +15,9 @@ namespace ApiBlackJack.Models
         }
 
         public int Id { get; set; }
-        public string Carta { get; set; }
-        
+        public string Valor { get; set; }
+        public string Palo { get; set; }
+
 
         public virtual ICollection<Detallepartidas> Detallepartidas { get; set; }
     }

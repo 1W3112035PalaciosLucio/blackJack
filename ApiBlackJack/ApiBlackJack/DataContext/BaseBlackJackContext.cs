@@ -34,14 +34,7 @@ namespace ApiBlackJack.DataContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Cartas>(entity =>
-            {
-                entity.ToTable("cartas");
-
-                entity.Property(e => e.Carta)
-                    .HasColumnName("carta")
-                    .HasColumnType("varchar");
-            });
+           
 
             modelBuilder.Entity<Detallepartidas>(entity =>
             {
