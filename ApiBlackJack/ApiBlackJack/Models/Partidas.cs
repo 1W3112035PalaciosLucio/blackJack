@@ -17,7 +17,10 @@ namespace ApiBlackJack.Models
         public int Id { get; set; }
         public int IdUsuario { get; set; }
         public DateTime Fecha { get; set; }
-        public ulong Activo { get; set; }
+        public bool Activo { get; set; }
+        public float PuntosJugador { get; set; }
+
+        public float PuntosCrupier { get; set; }
 
         public virtual Usuarios IdUsuarioNavigation { get; set; }
         public virtual ICollection<Detallepartidas> Detallepartidas { get; set; }
