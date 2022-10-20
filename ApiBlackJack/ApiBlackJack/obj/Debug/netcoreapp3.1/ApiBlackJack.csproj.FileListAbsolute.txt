@@ -185,3 +185,4 @@ C:\Users\Iñaki\Desktop\blackJack\ApiBlackJack\ApiBlackJack\obj\Debug\netcoreapp
 C:\Users\Iñaki\Desktop\blackJack\ApiBlackJack\ApiBlackJack\obj\Debug\netcoreapp3.1\ApiBlackJack.dll
 C:\Users\Iñaki\Desktop\blackJack\ApiBlackJack\ApiBlackJack\obj\Debug\netcoreapp3.1\ApiBlackJack.pdb
 C:\Users\Iñaki\Desktop\blackJack\ApiBlackJack\ApiBlackJack\obj\Debug\netcoreapp3.1\ApiBlackJack.genruntimeconfig.cache
+C:\Users\Iñaki\Desktop\blackJack\ApiBlackJack\ApiBlackJack\obj\Debug\netcoreapp3.1\ApiBlackJack.csproj.AssemblyReference.cache
