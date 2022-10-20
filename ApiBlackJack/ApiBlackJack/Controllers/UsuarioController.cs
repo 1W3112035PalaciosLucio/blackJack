@@ -10,6 +10,8 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using ApiBlackJack.Helper;
+using ApiBlackJack.Models;
 
 namespace ApiBlackJack.Controllers
 {
@@ -74,6 +76,50 @@ namespace ApiBlackJack.Controllers
                 return Ok(usuario);
             }
 
+        }
+
+
+        [HttpGet]
+        [Route("get")]
+        public async Task<IActionResult> Get()
+        {
+            List<UserComando> Usuarios = await context.Usuarios.Select(x => new UserComando()
+            {
+                idUsuario = x.Id,
+                usuario = x.Email
+            }).ToListAsync();
+            return Ok(Usuarios);
+        }
+
+        [HttpPost]
+        [Route("register")]
+
+        public async Task<IActionResult> Register(RegisterComando Usuario)
+        {
+            Usuarios u = new Usuarios();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
+            }
+
+            if (await context.Usuarios.Where(x => x.Email == Usuario.Email).AnyAsync())
+            {
+                return BadRequest(ErrorHelper.Response(400, $"El usuario {Usuario.Email} ya existe."));
+            }
+
+            HashedPassword Password = HashHelper.Hash(Usuario.ClaveHash);
+            u.Nombre = Usuario.Nombre;
+            u.Apellido = Usuario.Apellido;
+            u.Email = Usuario.Email;
+            u.ClaveHash = Password.Password;
+            u.ClaveSalt = Password.Salt;
+            context.Usuarios.Add(u);
+            await context.SaveChangesAsync();
+            return CreatedAtAction(nameof(Get), new { id = Usuario.Id }, new UserComando()
+            {
+                idUsuario = Usuario.Id,
+                usuario = Usuario.Email
+            });
         }
 
     }
