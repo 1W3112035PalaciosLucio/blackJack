@@ -26,7 +26,6 @@ namespace ApiBlackJack.Models
         [Required(ErrorMessage = "La contraseña no debe estar vacía.")]
         public string ClaveHash { get; set; }
         public string ClaveSalt { get; set; }
-        public string PhotoUrl { get; set; }
 
         public virtual ICollection<Partidas> Partidas { get; set; }
     }

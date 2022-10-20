@@ -131,11 +131,7 @@ namespace ApiBlackJack.DataContext
                     .HasCharSet("latin1")
                     .HasCollation("latin1_swedish_ci");
 
-                entity.Property(e => e.PhotoUrl)
-                    .HasColumnName("photoUrl")
-                    .HasColumnType("varchar(100)")
-                    .HasCharSet("latin1")
-                    .HasCollation("latin1_swedish_ci");
+
             });
 
             OnModelCreatingPartial(modelBuilder);
