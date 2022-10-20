@@ -38,18 +38,9 @@ namespace ApiBlackJack.DataContext
             {
                 entity.ToTable("cartas");
 
-                entity.Property(e => e.Disponible)
-                    .HasColumnName("disponible")
-                    .HasColumnType("bit(1)");
-
-                entity.Property(e => e.Numero).HasColumnName("numero");
-
-                entity.Property(e => e.Palo)
-                    .IsRequired()
-                    .HasColumnName("palo")
-                    .HasColumnType("varchar(2)")
-                    .HasCharSet("latin1")
-                    .HasCollation("latin1_swedish_ci");
+                entity.Property(e => e.Carta)
+                    .HasColumnName("carta")
+                    .HasColumnType("varchar");
             });
 
             modelBuilder.Entity<Detallepartidas>(entity =>

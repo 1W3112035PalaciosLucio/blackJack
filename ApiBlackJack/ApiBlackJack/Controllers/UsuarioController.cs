@@ -58,5 +58,23 @@ namespace ApiBlackJack.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("getUsuarios/{id}")]
+        public async Task<ActionResult<ResultadoBase>> getUsuarioById(int id)
+        {
+            var usuario = await context.Usuarios.Where(c => c.Id.Equals(id)).FirstOrDefaultAsync();
+            ResultadoBase resultado = new ResultadoBase();
+            if(usuario == null)
+            {
+                resultado.setError("Usuario no encontrado");
+                return BadRequest(resultado);
+            }
+            else
+            {
+                return Ok(usuario);
+            }
+
+        }
+
     }
 }
