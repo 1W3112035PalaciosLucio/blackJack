@@ -75,7 +75,8 @@ namespace ApiBlackJack.Controllers
             catch (Exception)
             {
 
-                throw;
+                result.setError("Algo malo ocurrio");
+                return BadRequest(result);
             }
 
         }
@@ -101,7 +102,8 @@ namespace ApiBlackJack.Controllers
             }
             catch (Exception)
             {
-                throw;
+                result.setError("Algo malo ocurrio");
+                return BadRequest(result);
             }
 
 
