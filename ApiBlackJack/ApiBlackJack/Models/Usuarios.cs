@@ -25,8 +25,8 @@ namespace ApiBlackJack.Models
         public string Email { get; set; }
         
         [Required(ErrorMessage = "La contraseña no debe estar vacía.")]
-        public string ClaveHash { get; set; }
-        public string ClaveSalt { get; set; }
+        public byte[] ClaveHash { get; set; }
+        public byte[] ClaveSalt { get; set; }
 
         [Compare("ClaveHash", ErrorMessage = "Las contraseñas no coinciden.")]
         [NotMapped]

@@ -2,38 +2,36 @@
 using System;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace ApiBlackJack.Helper
 {
     public class HashHelper
     {
-        public static HashedPassword Hash(string password)
+        public static void Hash(string password, out byte[] passwordSalt, out byte[] passwordHash)
         {
-            byte[] salt = new byte[128 / 8];
-            using (var rng = RandomNumberGenerator.Create())
+           
+            using (var hmac = new System.Security.Cryptography.HMACSHA512())
             {
-                rng.GetBytes(salt);
-            }
-
-            // derive a 256-bit subkey (use HMACSHA1 with 10,000 iterations)
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: password,
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8));
-            return new HashedPassword() { Password = hashed, Salt = Convert.ToBase64String(salt) };
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            };
+           
         }
 
-        public static bool CheckHash(string attemptedPassword, string hash, string salt)
+        public static bool CheckHash(string attemptedPassword, byte[] hash, byte[] salt)
         {
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                 password: attemptedPassword,
-                 salt: Convert.FromBase64String(salt),
-                 prf: KeyDerivationPrf.HMACSHA256,
-                 iterationCount: 10000,
-                 numBytesRequested: 256 / 8));
-            return hash == hashed;
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(salt))
+            {
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(attemptedPassword));
+
+                for (int i = 0; i < computedHash.Length; i++)
+                {
+                    if (computedHash[i] != hash[i]) return false;
+                }
+            }
+            return true;
+
         }
 
         public static byte[] GetHash(string password, string salt)

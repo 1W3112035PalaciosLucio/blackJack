@@ -74,12 +74,16 @@ namespace ApiBlackJack.Controllers
                 return BadRequest(ErrorHelper.Response(400, $"El usuario {Usuario.Email} ya existe."));
             }
 
-            HashedPassword Password = HashHelper.Hash(Usuario.ClaveHash);
+
+            byte[] passwordSalt;
+            byte[] passwordHash;
+
+            HashHelper.Hash(Usuario.Password, out passwordSalt,out passwordHash);
             u.Nombre = Usuario.Nombre;
             u.Apellido = Usuario.Apellido;
             u.Email = Usuario.Email;
-            u.ClaveHash = Password.Password;
-            u.ClaveSalt = Password.Salt;
+            u.ClaveHash = passwordHash;
+            u.ClaveSalt = passwordSalt;
             context.Usuarios.Add(u);
             await context.SaveChangesAsync();
             return CreatedAtAction(nameof(Get), new { id = Usuario.Id }, new UsuarioComando()

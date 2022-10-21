@@ -34,6 +34,7 @@ namespace ApiBlackJack.Controllers
         [Route("Login")]
         public async Task<ActionResult> LoginPost(LoginComando comando)
         {
+            
             if(!ModelState.IsValid)
             {
                 return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));

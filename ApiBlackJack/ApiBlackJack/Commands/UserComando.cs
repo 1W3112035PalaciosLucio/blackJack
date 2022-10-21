@@ -16,11 +16,8 @@ namespace ApiBlackJack.Commands
         [Required(ErrorMessage = "El legajo es requerido.")]
         public string Email { get; set; }
         [Required(ErrorMessage = "La contraseña es requerida.")]
-        public string ClaveHash { get; set; }
-        [Compare("ClaveHash", ErrorMessage = "Las claves deben ser iguales")]
-        [NotMapped]
-        public string ConfirmarClave { get; set; }
 
-        public string ClaveSalt { get; set; }
+        public string Password { get; set; }    
+
     }
 }
