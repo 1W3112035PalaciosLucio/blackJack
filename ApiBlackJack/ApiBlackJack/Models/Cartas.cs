@@ -11,14 +11,14 @@ namespace ApiBlackJack.Models
     {
         public Cartas()
         {
-            Detallepartidas = new HashSet<Detallepartidas>();
+
         }
 
         public int Id { get; set; }
-        public string Valor { get; set; }
+        public int Valor { get; set; }
         public string Palo { get; set; }
 
 
-        public virtual ICollection<Detallepartidas> Detallepartidas { get; set; }
+
     }
 }
