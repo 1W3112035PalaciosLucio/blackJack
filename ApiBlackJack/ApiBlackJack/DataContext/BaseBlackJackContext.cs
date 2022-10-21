@@ -50,11 +50,7 @@ namespace ApiBlackJack.DataContext
 
                 entity.Property(e => e.IdPartida).HasColumnName("id_partida");
 
-                entity.HasOne(d => d.IdCartaNavigation)
-                    .WithMany(p => p.Detallepartidas)
-                    .HasForeignKey(d => d.IdCarta)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("UsuariosCartas");
+             
 
                 entity.HasOne(d => d.IdPartidaNavigation)
                     .WithMany(p => p.Detallepartidas)
