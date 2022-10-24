@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Iñaki\\Desktop\\punto\\blackJack\\ApiBlackJack\\ApiBlackJack\\ApiBlackJack.csproj": {}
+    "D:\\Escritorio\\BlackJack\\blackJack\\ApiBlackJack\\ApiBlackJack\\ApiBlackJack.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Iñaki\\Desktop\\punto\\blackJack\\ApiBlackJack\\ApiBlackJack\\ApiBlackJack.csproj": {
+    "D:\\Escritorio\\BlackJack\\blackJack\\ApiBlackJack\\ApiBlackJack\\ApiBlackJack.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Iñaki\\Desktop\\punto\\blackJack\\ApiBlackJack\\ApiBlackJack\\ApiBlackJack.csproj",
+        "projectUniqueName": "D:\\Escritorio\\BlackJack\\blackJack\\ApiBlackJack\\ApiBlackJack\\ApiBlackJack.csproj",
         "projectName": "ApiBlackJack",
-        "projectPath": "C:\\Users\\Iñaki\\Desktop\\punto\\blackJack\\ApiBlackJack\\ApiBlackJack\\ApiBlackJack.csproj",
-        "packagesPath": "C:\\Users\\Iñaki\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Iñaki\\Desktop\\punto\\blackJack\\ApiBlackJack\\ApiBlackJack\\obj\\",
+        "projectPath": "D:\\Escritorio\\BlackJack\\blackJack\\ApiBlackJack\\ApiBlackJack\\ApiBlackJack.csproj",
+        "packagesPath": "C:\\Users\\lucio\\.nuget\\packages\\",
+        "outputPath": "D:\\Escritorio\\BlackJack\\blackJack\\ApiBlackJack\\ApiBlackJack\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Iñaki\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lucio\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -95,16 +95,11 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[3.1.25, 3.1.25]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -113,7 +108,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

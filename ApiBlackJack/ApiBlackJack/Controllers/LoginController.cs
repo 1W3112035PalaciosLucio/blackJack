@@ -19,7 +19,7 @@ namespace ApiBlackJack.Controllers
 {
  
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class LoginController : Controller
     {
         private readonly BaseBlackJackContext context;
@@ -33,7 +33,7 @@ namespace ApiBlackJack.Controllers
         [HttpPost]
         [Route("Login")]
         public async Task<ActionResult> LoginPost(LoginComando comando)
-        {
+                        {
             
             if(!ModelState.IsValid)
             {
