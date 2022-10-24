@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Iñaki\\Desktop\\punto\\blackJack\\ApiBlackJack\\ApiBlackJack\\ApiBlackJack.csproj": {}
+    "C:\\Users\\Iñaki\\Desktop\\blackBack\\blackJack\\ApiBlackJack\\ApiBlackJack\\ApiBlackJack.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Iñaki\\Desktop\\punto\\blackJack\\ApiBlackJack\\ApiBlackJack\\ApiBlackJack.csproj": {
+    "C:\\Users\\Iñaki\\Desktop\\blackBack\\blackJack\\ApiBlackJack\\ApiBlackJack\\ApiBlackJack.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Iñaki\\Desktop\\punto\\blackJack\\ApiBlackJack\\ApiBlackJack\\ApiBlackJack.csproj",
+        "projectUniqueName": "C:\\Users\\Iñaki\\Desktop\\blackBack\\blackJack\\ApiBlackJack\\ApiBlackJack\\ApiBlackJack.csproj",
         "projectName": "ApiBlackJack",
-        "projectPath": "C:\\Users\\Iñaki\\Desktop\\punto\\blackJack\\ApiBlackJack\\ApiBlackJack\\ApiBlackJack.csproj",
+        "projectPath": "C:\\Users\\Iñaki\\Desktop\\blackBack\\blackJack\\ApiBlackJack\\ApiBlackJack\\ApiBlackJack.csproj",
         "packagesPath": "C:\\Users\\Iñaki\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Iñaki\\Desktop\\punto\\blackJack\\ApiBlackJack\\ApiBlackJack\\obj\\",
+        "outputPath": "C:\\Users\\Iñaki\\Desktop\\blackBack\\blackJack\\ApiBlackJack\\ApiBlackJack\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Iñaki\\AppData\\Roaming\\NuGet\\NuGet.Config",

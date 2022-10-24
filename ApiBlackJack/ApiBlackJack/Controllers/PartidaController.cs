@@ -2,6 +2,7 @@
 using ApiBlackJack.DataContext;
 using ApiBlackJack.Models;
 using ApiBlackJack.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace ApiBlackJack.Controllers
 {
+   
     [Route("api/[controller]")]
     [ApiController]
     public class PartidaController : ControllerBase
@@ -26,8 +28,8 @@ namespace ApiBlackJack.Controllers
 
         }
         [HttpPost]
-        [Route("iniciarPartida/{email}")]
-        public async Task<ActionResult<ResultadoBase>> iniciarPartida(string email)
+        [Route("iniciarPartida")]
+        public async Task<ActionResult<ResultadoBase>> iniciarPartida([FromBody] string email)
         {
             ResultadoBase result = new ResultadoBase();
             var usuario = await context.Usuarios.Where(c => c.Email.Equals(email)).FirstOrDefaultAsync();
@@ -50,7 +52,7 @@ namespace ApiBlackJack.Controllers
                 await context.SaveChangesAsync();
 
                 result.setOk();
-                return Ok(result);
+                return Ok(p.Id);
             }
         }
 

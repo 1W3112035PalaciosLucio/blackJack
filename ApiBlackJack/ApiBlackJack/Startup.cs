@@ -32,22 +32,22 @@ namespace ApiBlackJack
         public void ConfigureServices(IServiceCollection services)
         {
 
-            var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("SecretKey"));
+            /** var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("SecretKey"));
 
-            services.AddAuthentication(x => {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x => {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
+             services.AddAuthentication(x => {
+                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+             }).AddJwtBearer(x => {
+                 x.RequireHttpsMetadata = false;
+                 x.SaveToken = true;
+                 x.TokenValidationParameters = new TokenValidationParameters
+                 {
+                     ValidateIssuerSigningKey = true,
+                     IssuerSigningKey = new SymmetricSecurityKey(key),
+                     ValidateIssuer = false,
+                     ValidateAudience = false
+                 };
+        });**/
 
             services.AddRazorPages();
             services.AddDbContext<BaseBlackJackContext>(x => x.UseMySQL("Server=localhost; Database=BlackJack; Port=3306;User Id=root; Password=45262;"));
@@ -89,9 +89,9 @@ namespace ApiBlackJack
 
             app.UseRouting();
 
-            app.UseAuthorization();
+           //app.UseAuthorization();
 
-            app.UseAuthentication();
+           //app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

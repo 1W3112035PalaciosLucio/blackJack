@@ -13,7 +13,6 @@ namespace ApiBlackJack.Models
         public int IdPartida { get; set; }
         public int IdCarta { get; set; }
 
-        public virtual Cartas IdCartaNavigation { get; set; }
         public virtual Partidas IdPartidaNavigation { get; set; }
     }
 }

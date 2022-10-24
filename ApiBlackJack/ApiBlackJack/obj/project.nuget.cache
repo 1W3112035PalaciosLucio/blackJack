@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1IaWKmvAUB7BwKri21oG4tXQyKNmN/B+hZZbifTYGhsPsk9AzIBFDH8q9rQ8AQd+YintezhxcU2+aCfesGYvyg==",
+  "dgSpecHash": "8vEqu/8TbFVXDqNyvv2cMjZZCeg+L5myueKpf/8UmACYv238TcoiMYZfPbbH30CjKojITxGtWlajacS9Z3APSQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Iñaki\\Desktop\\punto\\blackJack\\ApiBlackJack\\ApiBlackJack\\ApiBlackJack.csproj",
+  "projectFilePath": "C:\\Users\\Iñaki\\Desktop\\blackBack\\blackJack\\ApiBlackJack\\ApiBlackJack\\ApiBlackJack.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Iñaki\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\Iñaki\\.nuget\\packages\\google.protobuf\\3.11.4\\google.protobuf.3.11.4.nupkg.sha512",
