@@ -60,6 +60,20 @@ namespace ApiBlackJack.Controllers
             return Ok(usuario);
         }
 
+        [HttpGet]
+        [Route("getUser/{id}")]
+        public async Task<IActionResult> GetU(int id)
+        {
+            UsuarioComando Usuarios = await context.Usuarios.Where(x => x.Id == id).Select(x => new UsuarioComando()
+            {
+                IdUsuario = x.Id,
+                Usuario = x.Email
+            }).SingleOrDefaultAsync();
+            return Ok(Usuarios);
+
+
+        }
+
         [HttpPost]
         [Route("CrearUsuario")]
 
@@ -81,7 +95,7 @@ namespace ApiBlackJack.Controllers
             byte[] passwordSalt;
             byte[] passwordHash;
 
-            HashHelper.Hash(Usuario.Password, out passwordSalt,out passwordHash);
+            HashHelper.Hash(Usuario.Password, out passwordSalt, out passwordHash);
             u.Nombre = Usuario.Nombre;
             u.Apellido = Usuario.Apellido;
             u.Email = Usuario.Email;
@@ -89,7 +103,7 @@ namespace ApiBlackJack.Controllers
             u.ClaveSalt = passwordSalt;
             context.Usuarios.Add(u);
             await context.SaveChangesAsync();
-            return CreatedAtAction(nameof(Get), new { id = Usuario.Id }, new UsuarioComando()
+            return CreatedAtAction(nameof(GetU), new { id = Usuario.Id }, new UsuarioComando()
             {
                 IdUsuario = Usuario.Id,
                 Usuario = Usuario.Email
