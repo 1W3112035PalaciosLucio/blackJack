@@ -134,6 +134,20 @@ namespace ApiBlackJack.Controllers
         }
 
         [HttpGet]
+        [Route("obtenerDetallesPartidaById/{id}")]
+        public async Task<ActionResult> obtenerDetallesPartidaById(int id)
+        {
+            ResultadoBase result = new ResultadoBase();
+            var partidas = await context.Detallepartidas.Where(c => c.IdPartida.Equals(id)).ToListAsync();
+            if (partidas == null)
+            {
+                result.setError("No existe esa partida");
+                return BadRequest(result);
+            }
+            return Ok(partidas);
+        }
+
+        [HttpGet]
         [Route("obtenerPartidasUsuario/{id}")]
         public async Task<ActionResult> obtenerPartidasById(int id)
         {
@@ -152,6 +166,14 @@ namespace ApiBlackJack.Controllers
         public async Task<ActionResult> obtenerCartas()
         {
             var cartas = await context.Cartas.ToListAsync();
+            return Ok(cartas);
+        }
+
+        [HttpGet]
+        [Route("obtenerCartasById/{id}")]
+        public async Task<ActionResult> obtenerCartas(int id)
+        {
+            var cartas = await context.Cartas.Where(x => x.Id.Equals(id)).FirstOrDefaultAsync();
             return Ok(cartas);
         }
 
