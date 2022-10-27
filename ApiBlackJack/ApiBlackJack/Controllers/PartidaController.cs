@@ -64,23 +64,10 @@ namespace ApiBlackJack.Controllers
             detalle.IdCarta = comando.IdCarta;
             detalle.IdPartida = comando.IdPartida;
             ResultadoBase result = new ResultadoBase();
-
-
-            try
-            {
                 context.Detallepartidas.Add(detalle);
                 await context.SaveChangesAsync();
                 result.setOk();
                 return Ok(result);
-
-            }
-            catch (Exception)
-            {
-
-                result.setError("Algo malo ocurrio");
-                return BadRequest(result);
-            }
-
         }
 
 
