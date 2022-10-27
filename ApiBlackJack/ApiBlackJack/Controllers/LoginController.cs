@@ -17,7 +17,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ApiBlackJack.Controllers
 {
- 
+
     [ApiController]
     [Route("api/[controller]")]
     public class LoginController : Controller
@@ -33,19 +33,19 @@ namespace ApiBlackJack.Controllers
         [HttpPost]
         [Route("Login")]
         public async Task<ActionResult> LoginPost(LoginComando comando)
-                        {
-            
-            if(!ModelState.IsValid)
+        {
+
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ErrorHelper.GetModelStateErrors(ModelState));
             }
 
             Usuarios usuario = await context.Usuarios.Where(x => x.Email == comando.Email).FirstOrDefaultAsync();
-            if(usuario == null)
+            if (usuario == null)
             {
                 return NotFound(ErrorHelper.Response(404, "Usuario no encontrado"));
             }
-            if(HashHelper.CheckHash(comando.Clave, usuario.ClaveHash, usuario.ClaveSalt))
+            if (HashHelper.CheckHash(comando.Clave, usuario.ClaveHash, usuario.ClaveSalt))
             {
                 var secretKey = config.GetValue<string>("SecretKey");
                 var key = Encoding.ASCII.GetBytes(secretKey);
@@ -61,10 +61,13 @@ namespace ApiBlackJack.Controllers
                 };
 
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var createdToken = tokenHandler.CreateToken(tokenDescriptor);
+                var token = tokenHandler.CreateToken(tokenDescriptor);
 
-                string bearer_token = tokenHandler.WriteToken(createdToken);
-                return Ok(bearer_token);
+                var user = ((UsuarioLista)usuario);
+
+               // string bearer_token = tokenHandler.WriteToken(token);
+                // return Ok(bearer_token);
+                return Ok(new { token = tokenHandler.WriteToken(token), user });
 
             }
             else
