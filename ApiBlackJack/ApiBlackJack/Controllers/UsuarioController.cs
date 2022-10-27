@@ -46,15 +46,18 @@ namespace ApiBlackJack.Controllers
         }
 
         [HttpGet]
-        [Route("getUserId/{id}")]
-        public async Task<IActionResult> Get(int id)
+        [Route("getUserEmail/{email}")]
+        public async Task<IActionResult> Get(string email)
         {
-            UsuarioComando Usuarios = await context.Usuarios.Where(x => x.Id == id).Select(x => new UsuarioComando()
-            {
-                IdUsuario = x.Id,
-                Usuario = x.Email
-            }).SingleOrDefaultAsync();
-            return Ok(Usuarios);
+            var user = await context.Usuarios.Where(x => x.Email.Equals(email)).FirstOrDefaultAsync();
+
+            UsuarioByEmail usuario = new UsuarioByEmail();
+            usuario.Nombre = user.Nombre;
+            usuario.Email = user.Email;
+            usuario.Apellido = user.Apellido;
+            usuario.Id = user.Id;
+
+            return Ok(usuario);
         }
 
         [HttpPost]

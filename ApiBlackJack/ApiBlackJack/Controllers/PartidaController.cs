@@ -28,8 +28,8 @@ namespace ApiBlackJack.Controllers
 
         }
         [HttpPost]
-        [Route("iniciarPartida")]
-        public async Task<ActionResult<ResultadoBase>> iniciarPartida([FromBody] string email)
+        [Route("iniciarPartida/{email}")]
+        public async Task<ActionResult<ResultadoBase>> iniciarPartida(string email)
         {
             ResultadoBase result = new ResultadoBase();
             var usuario = await context.Usuarios.Where(c => c.Email.Equals(email)).FirstOrDefaultAsync();
@@ -95,7 +95,7 @@ namespace ApiBlackJack.Controllers
             {
                 partida.PuntosCrupier = comando.PuntosCrupier;
                 partida.PuntosJugador = comando.PuntosJugador;
-
+                partida.Activo = false;
                 context.Update(partida);
                 await context.SaveChangesAsync();
                 result.setOk();
@@ -126,6 +126,20 @@ namespace ApiBlackJack.Controllers
             ResultadoBase result = new ResultadoBase();
             var partida = await context.Partidas.Where(c=>c.Id.Equals(id)).FirstOrDefaultAsync();
             if(partida == null)
+            {
+                result.setError("No existe esa partida");
+                return BadRequest(result);
+            }
+            return Ok(partida);
+        }
+
+        [HttpGet]
+        [Route("obtenerPartidasUsuario/{id}")]
+        public async Task<ActionResult> obtenerPartidasById(int id)
+        {
+            ResultadoBase result = new ResultadoBase();
+            var partida = await context.Partidas.Where(c => c.IdUsuario.Equals(id)).ToListAsync();
+            if (partida == null)
             {
                 result.setError("No existe esa partida");
                 return BadRequest(result);
