@@ -22,11 +22,11 @@ namespace ApiBlackJack.Controllers
         }
 
         [HttpGet]
-        [Route("IndiceVictoriasCrupier")]
-        public async Task<float> getIndiceCroupier()
+        [Route("IndiceVictoriasCrupier/{id}")]
+        public async Task<float> getIndiceCroupier(int id)
         {
-            var partidas = await context.Partidas.ToListAsync();
-            var query = await context.Partidas.Where(c => c.PuntosCrupier > c.PuntosJugador && c.PuntosCrupier <= 21 || c.PuntosJugador > 21).ToListAsync();
+            var partidas = await context.Partidas.Where(c=> c.IdUsuario.Equals(id)).ToListAsync();
+            var query = await context.Partidas.Where(c => c.IdUsuario.Equals(id) && (c.PuntosCrupier > c.PuntosJugador && c.PuntosCrupier <= 21 || c.PuntosJugador > 21)).ToListAsync();
 
             var cantidadPartidas = partidas.ToArray().Length;
             var vecesganoCroupier = query.ToArray().Length;
