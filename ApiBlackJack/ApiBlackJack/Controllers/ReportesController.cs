@@ -54,25 +54,28 @@ namespace ApiBlackJack.Controllers
 
 
         [HttpGet]
-        [Route("promedioJugadas21")]
-        public async Task<IndiceCroupierDTO> getPromedioJugadas()
+        [Route("promedioJugadas21/{id}")]
+        public async Task<IndiceCroupierDTO> getPromedioJugadas(int id)
         {
 
             var partidas = await context.Partidas.ToListAsync();
-            var Crupier21 = await context.Partidas.Where(c => c.PuntosCrupier == 21).ToListAsync();
-            var Jugador21 = await context.Partidas.Where(c => c.PuntosJugador == 21).ToListAsync();
+            var Crupier21 = await context.Partidas.Where(c => c.PuntosCrupier == 21 && c.IdUsuario.Equals(id)).ToListAsync();
+            var Jugador21 = await context.Partidas.Where(c => c.PuntosJugador == 21 && c.IdUsuario.Equals(id)).ToListAsync();
 
 
-            var cantidadPartidas = partidas.ToArray().Length;
+            
             var veces21Croupier = Crupier21.ToArray().Length;
             var veces21Jugador = Jugador21.ToArray().Length;
+            var cantidadPartidas = veces21Croupier+veces21Jugador;
 
             IndiceCroupierDTO resultado = new IndiceCroupierDTO();
-            resultado.promedioCroupier = (veces21Croupier * 100) / cantidadPartidas;
-            resultado.promedioJugadores = (veces21Jugador * 100) / cantidadPartidas;
-
-
+            if (cantidadPartidas > 0)
+            {
+                resultado.promedioCroupier = (veces21Croupier * 100) / cantidadPartidas;
+                resultado.promedioJugadores = (veces21Jugador * 100) / cantidadPartidas;
+            }
             return resultado;
+  
         }
 
 
