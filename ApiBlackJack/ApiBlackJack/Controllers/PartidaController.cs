@@ -218,7 +218,4 @@ namespace ApiBlackJack.Controllers
             return Ok(carta);
         }
     }
-    //calcularPuntos
-    //resultadoPartida
-    //reiniciar
 }
