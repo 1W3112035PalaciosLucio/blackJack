@@ -1,5 +1,6 @@
 ﻿using ApiBlackJack.Commands;
 using ApiBlackJack.DataContext;
+using ApiBlackJack.DTO;
 using ApiBlackJack.Models;
 using ApiBlackJack.Results;
 using Microsoft.AspNetCore.Authorization;
@@ -21,11 +22,12 @@ namespace ApiBlackJack.Controllers
         private readonly BaseBlackJackContext context;
         private List<Cartas> cartasJugador = new List<Cartas>();
         private List<Cartas> cartasCrupier = new List<Cartas>();
+        DTOPuntos Puntos;
 
         public PartidaController(BaseBlackJackContext _context)
         {
             this.context = _context;
-
+            this.Puntos = new DTOPuntos();
         }
         [HttpPost]
         [Route("iniciarPartida/{email}")]
@@ -177,6 +179,7 @@ namespace ApiBlackJack.Controllers
                 var id = r.Next(1, 57);
                 Cartas? carta = await context.Cartas.Where(c => c.Id.Equals(id)).FirstOrDefaultAsync();
                 this.cartasJugador.Add(carta);
+                this.Puntos.setPuntosJugador(carta.Valor);
             }
 
             return Ok(this.cartasJugador);
@@ -215,4 +218,7 @@ namespace ApiBlackJack.Controllers
             return Ok(carta);
         }
     }
+    //calcularPuntos
+    //resultadoPartida
+    //reiniciar
 }
